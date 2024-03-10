@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Node struct {
 	value any
@@ -15,22 +17,24 @@ func main() {
 
 	list := &LinkList{}
 
-	list.append(1)
 	list.append(2)
 	list.append(3)
+	list.append(4)
 	list.printLIst()
-	list.preappend(6)
-	list.preappend(7)
+	list.preappend(1)
+
 	list.printLIst()
 
-	list.insert(6, 7)
-	list.insert(2, 3)
+	list.insert(5, 3)
+	list.insert(2, 7)
 
 	list.printLIst()
 
 	// delet by index
 	list.deleteitem(1)
+	list.printLIst()
 
+	list.reverseList()
 	list.printLIst()
 
 }
@@ -133,5 +137,21 @@ func (li *LinkList) deleteitem(index int) {
 	deleteNode := prevNode.next
 
 	prevNode.next = deleteNode.next
+
+}
+
+func (li *LinkList) reverseList() {
+
+	var prev *Node = nil
+	current := li.head
+	var next *Node = nil
+
+	for current != nil {
+		next = current.next
+		current.next = prev
+		prev = current
+		current = next
+	}
+	li.head = prev
 
 }
